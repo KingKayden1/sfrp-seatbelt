@@ -9,6 +9,12 @@ local lib = exports.ox_lib
 ----------------------------------    Pixel Made The Code
 ----------------------------------    Kayden Did The Config And Notifications
 
+local function drawNativeNotification(text)
+    SetTextComponentFormat("STRING")
+    AddTextComponentString(text)
+    DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+end
+
 
 
 
@@ -50,6 +56,8 @@ CreateThread(function()
                             description = 'Seatbelt Fastened ✅',
                             type = 'success'
                         })
+                    elseif Config.Notify == 'standalone' then
+                        drawNativeNotification('Seatbelt Fastened')
                     end
                 elseif seatbeltOn == false then
                     if Config.Notify == 'qb' then
@@ -60,7 +68,9 @@ CreateThread(function()
                             description = 'Seatbelt Removed 🚫',
                             type = 'error',
                         }) 
-                    end  
+                    elseif Config.Notify == 'standalone' then
+                        drawNativeNotification('Seatbelt Removed')
+                    end 
                 end 
             end
         end
